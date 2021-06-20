@@ -1,0 +1,27 @@
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+ 
+int umidade;
+ 
+void setup()
+{
+  lcd.begin(16, 2);
+  pinMode(13, OUTPUT);
+}
+ 
+void loop()
+{
+  digitalWrite(13, LOW);
+  lcd.setCursor(0, 0);
+  umidade = analogRead(A0);
+  umidade = map(umidade, 1023, 0, 0, 100);
+  lcd.print("Umidade em:");
+  lcd.print(umidade);
+  lcd.print(" %");
+  if(umidade < 20)
+  {
+       digitalWrite(13, HIGH);
+  }
+  delay(500);
+  lcd.clear();
+}
